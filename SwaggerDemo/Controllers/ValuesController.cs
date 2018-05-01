@@ -30,7 +30,10 @@ namespace SwaggerDemo.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            if (id == 1)
+                return "value1";
+            else
+                return "value2";
         }
         /// <summary>
         /// This post method takes a value and do nothing with it.

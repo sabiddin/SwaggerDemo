@@ -55,6 +55,13 @@ namespace SwaggerDemo
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+            services.AddCors(
+                options => options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                    })
+                    );              
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +80,9 @@ namespace SwaggerDemo
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseCors(builder =>
+       builder.WithOrigins("http://localhost:51592/")
+         .AllowAnyHeader());
             app.UseMvc();
 
         }
